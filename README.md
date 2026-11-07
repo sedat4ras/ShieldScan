@@ -1,6 +1,6 @@
 # ShieldScan
 
-> A comprehensive source code security scanning pipeline combining SAST, SCA, and secrets detection with local LLM triage for prioritized, actionable findings.
+> A source code security scanning pipeline that combines SAST, SCA, and secrets detection with local LLM triage for prioritized, actionable findings.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![SAST](https://img.shields.io/badge/SAST-Semgrep-26C242?style=flat-square)](https://semgrep.dev/)
@@ -16,9 +16,9 @@
 
 ShieldScan is a production-grade DevSecOps pipeline that scans source code repositories for vulnerabilities across three dimensions:
 
-1. **SAST** (Static Application Security Testing) — Code pattern matching for vulnerabilities (SQL injection, XSS, weak crypto)
-2. **SCA** (Software Composition Analysis) — Dependency scanning for known CVEs
-3. **Secrets Detection** — Hardcoded API keys, tokens, passwords
+1. **SAST** (Static Application Security Testing): Code pattern matching for vulnerabilities (SQL injection, XSS, weak crypto)
+2. **SCA** (Software Composition Analysis): Dependency scanning for known CVEs
+3. **Secrets Detection**: Hardcoded API keys, tokens, passwords
 
 All findings are automatically categorized and prioritized using a **local Ollama Mistral LLM** (no API costs, fully offline).
 
@@ -78,10 +78,10 @@ All findings are automatically categorized and prioritized using a **local Ollam
 
 ### For Local Development:
 - Python 3.11+
-- [Semgrep](https://semgrep.dev) — SAST scanner (install via `pip install semgrep`)
-- [Trivy](https://github.com/aquasecurity/trivy) — SCA scanner
-- [Gitleaks](https://github.com/gitleaks/gitleaks) — Secrets scanner
-- [Ollama](https://ollama.ai) — Local LLM runtime (required for full functionality)
+- [Semgrep](https://semgrep.dev): SAST scanner (install via `pip install semgrep`)
+- [Trivy](https://github.com/aquasecurity/trivy): SCA scanner
+- [Gitleaks](https://github.com/gitleaks/gitleaks): Secrets scanner
+- [Ollama](https://ollama.ai): Local LLM runtime (required for full functionality)
 - Mistral 7B model (download: `ollama pull mistral`)
 
 ### For Docker:
@@ -177,8 +177,8 @@ python main.py
 **Total time:** ~2-3 minutes for typical repo
 
 **Output:**
-- `security_report_[timestamp].md` — Human-readable findings with remediation steps
-- `findings_[timestamp].json` — Structured JSON data for SIEM integration
+- `security_report_[timestamp].md`: Human-readable findings with remediation steps
+- `findings_[timestamp].json`: Structured JSON data for SIEM integration
 
 ### Fallback Mode (No Ollama)
 
@@ -237,7 +237,7 @@ The Dockerfile is a 3-stage build (scanners / pydeps / runtime):
 - **Base:** `python:3.11.16-slim-trixie`, non-root user `shield` (UID 10001)
 - **Pinned:** Semgrep 1.174.0, Trivy 0.74.0, Gitleaks 8.30.1
 - **Runtime footprint:** ~770 MB, only `git` + `ca-certificates` on top of the Python slim
-- **No apt repos** for third-party tools — release tarballs pulled directly from GitHub, so upstream apt-key / signed-by churn cannot break the build
+- **No apt repos** for third-party tools: release tarballs pulled directly from GitHub, so upstream apt-key / signed-by churn cannot break the build
 
 The design and trade-offs are written up in
 [docs/writeup-dockerfile-and-ci.md](docs/writeup-dockerfile-and-ci.md).
@@ -275,7 +275,7 @@ Typical run time: **~3 minutes** end-to-end from a cold cache.
 ### Ollama + Mistral LLM
 - **Runs locally:** Zero API costs, 100% private
 - **Model:** Mistral 7B (8GB VRAM, ~30s response time)
-- **Function:** Reads all scanner outputs → produces prioritized report
+- **Function:** Reads all scanner outputs and produces a prioritized report
 
 ## v1 → v2 Migration
 
@@ -352,9 +352,9 @@ python main.py
 
 ## Architecture Notes
 
-This tool implements the DevSecOps principle of **"shift-left"** security — catching issues before they reach production. Compared to v1 (which used raw Nmap output + GPT emoji ratings), v2:
+This tool implements the DevSecOps principle of **"shift-left"** security, which means catching issues before they reach production. Compared to v1 (which used raw Nmap output + GPT emoji ratings), v2:
 
-- ✅ Uses **real vulnerability scanners** (not just port lists)
+- ✅ Uses **real vulnerability scanners** instead of port lists
 - ✅ Implements **genuine logic** (CVE correlation, pattern matching)
 - ✅ **Categorizes findings** properly (by type, severity, package)
 - ✅ **Local LLM triage** (no external API, no costs)
@@ -362,7 +362,7 @@ This tool implements the DevSecOps principle of **"shift-left"** security — ca
 
 ## License
 
-MIT — See LICENSE file
+MIT. See LICENSE file.
 
 ## Contact
 
